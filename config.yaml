@@ -1,0 +1,47 @@
+# CycleGAN H&E Conversion Configuration
+
+# Data paths
+data:
+  c01_path: "small_dataset/C01"
+  c02_path: "small_dataset/C02"
+  he_stained_path: "data/he_stained"  # Path to H&E target domain images (if available)
+  output_path: "output"
+  checkpoint_path: "checkpoints"
+
+# Model parameters
+model:
+  input_nc: 3  # Number of input channels (RGB)
+  output_nc: 3  # Number of output channels (RGB)
+  ngf: 64  # Number of generator filters in first conv layer
+  ndf: 64  # Number of discriminator filters in first conv layer
+  n_residual_blocks: 9  # Number of residual blocks in generator
+  dropout: false
+
+# Training parameters
+training:
+  batch_size: 1
+  num_epochs: 200
+  lr: 0.0002
+  beta1: 0.5
+  beta2: 0.999
+  lr_policy: "linear"  # linear decay after epoch 100
+  lr_decay_epochs: 100
+  lambda_cycle: 10.0  # Cycle consistency loss weight
+  lambda_identity: 0.5  # Identity loss weight
+  lambda_adversarial: 1.0  # Adversarial loss weight
+  save_epoch_freq: 10  # Save checkpoint every N epochs
+  print_freq: 100  # Print loss every N iterations
+  save_latest_freq: 5000  # Save latest checkpoint every N iterations
+
+# Image processing
+image:
+  image_size: 256  # Resize images to this size
+  normalize_range: [-1, 1]  # Normalize to [-1, 1] for tanh output
+  num_workers: 4  # DataLoader workers
+
+# Inference parameters
+inference:
+  checkpoint_file: null  # Path to trained model checkpoint
+  batch_size: 1
+  output_format: "png"  # png or tiff
+
