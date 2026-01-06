@@ -4,6 +4,9 @@ checkpoints/
 output/
 small_dataset/
 
+# Download scripts
+download_*
+
 # Python cache
 __pycache__/
 *.pyc
